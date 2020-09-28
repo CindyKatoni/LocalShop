@@ -20,7 +20,11 @@ def create_app(config_name):
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
-    # temporary route
+    # Register Home Blueprint
+    from app import models
+    
+    from .home import home as home_blueprint
+    app.register_blueprint(home_blueprint)
 
         
     return app
