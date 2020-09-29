@@ -1,14 +1,22 @@
-#3 models;User,Product,Role 
-
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+<<<<<<< HEAD
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+=======
+>>>>>>> intialised log manager
 from app import db, login_manager
 
 
 class User(UserMixin, db.Model):
     """
+<<<<<<< HEAD
     Create an User table
+=======
+    Create an Employee table
+>>>>>>> intialised log manager
     """
 
     __tablename__ = 'users'
@@ -49,7 +57,11 @@ class User(UserMixin, db.Model):
 # Set up user_loader
 @login_manager.user_loader
 def load_user(user_id):
+<<<<<<< HEAD
     return User.query.get(int(user_id))
+=======
+    return Employee.query.get(int(user_id))
+>>>>>>> intialised log manager
 
 
 class Product(db.Model):
@@ -82,9 +94,17 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
     description = db.Column(db.String(200))
+<<<<<<< HEAD
     users = db.relationship('User', backref='role',
                                 lazy='dynamic')
 
     def __repr__(self):
         return '<Role: {}>'.format(self.name)
         
+=======
+    employees = db.relationship('User', backref='role',
+                                lazy='dynamic')
+
+    def __repr__(self):
+        return '<Role: {}>'.format(self.name)
+>>>>>>> intialised log manager

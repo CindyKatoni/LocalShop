@@ -1,18 +1,24 @@
-#Application's entry point
-#3rd Party Imports
-from flask import Flask
+from flask import Flask 
+from config import Config
+from flask_login import LoginManager
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< HEAD
 from flask_login import LoginManager
 
 
+=======
+from flask_mail import Mail
+>>>>>>> intialised log manager
 
-
-#local imports
-from config import app_config
-
-#Db initialization
 db = SQLAlchemy()
+bootstap = Bootstrap()
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
+mail = Mail()
 
+<<<<<<< HEAD
 login_manager = LoginManager()
 
 def create_app(config_name):
@@ -49,6 +55,21 @@ def create_app(config_name):
 
         
     return app
+=======
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    from .auth import auth as authentication_blueprint
+>>>>>>> intialised log manager
+
+    app.register_blueprint(authentication_blueprint)
+
+    login_manager.init_app(app)
+    db.init_app(app)
+    bootstap.init_app(app)
+    mail.init_app(app)
+    
+    return app
 
     
-
