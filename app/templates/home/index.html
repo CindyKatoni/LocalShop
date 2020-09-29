@@ -28,17 +28,14 @@
         </div>
         <ul class="text-center text-capitalize nav-agile" data-aos="zoom-in-up">
           <li>
-            <a href="{{ url_for('home.landingpage') }}" class="active">home</a>
+            <a href="{{ url_for('home.landingpage') }}" class="active">Home</a>
           </li>
           <li>
-            <a href="{{ url_for('home.dashboard') }}" class="scroll">Dashboard</a>
-          </li>
-          <li>
-            <a href="{{ url_for('home.register') }}" class="scroll">Register</a>
+            <a href="#" class="scroll">Register</a>
           </li>
           <li>
             <button type="button" class="btn w3ls-btn" data-toggle="modal" aria-pressed="false" data-target="#exampleModalCenter2">
-              Login
+              <a href="{{ url_for('home.dashboardpage') }}" class="scroll">Dashboard</a>
             </button>
           </li>
         </ul>
