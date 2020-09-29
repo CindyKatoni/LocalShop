@@ -16,6 +16,7 @@ def create_app(config_name):
     also it creates a db object
     '''
     app = Flask(__name__, instance_relative_config=True)
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
     db.init_app(app)
