@@ -1,9 +1,9 @@
 from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 from . import admin
-from forms import ProductForm,ClerkForm
+from forms import ProductForm,RoleForm
 from .. import db
-from ..models import Product,Clerk
+from ..models import Product,Role
 
 def check_admin():
     """
@@ -95,68 +95,65 @@ def edit_product(id):
 
 
 
-# clerk Views
-
-
-@admin.route('/clerks')
+@admin.route('/roles')
 @login_required
-def list_clerks():
+def list_roles():
     check_admin()
     """
-    List all clerks
+    List all roles
     """
-    clerks = Clerk.query.all()
-    return render_template('admin/clerks/clerks.html',
-                           clerks=clerks, title='Clerks')
+    roles = Role.query.all()
+    return render_template('admin/roles/roles.html',
+                           roles=roles, title='Roles')
 
 
-@admin.route('/clerks/add', methods=['GET', 'POST'])
+@admin.route('/roles/add', methods=['GET', 'POST'])
 @login_required
-def add_clerk():
+def add_role():
     """
-    Add a clerk to the database
+    Add a role to the database
     """
     check_admin()
 
-    add_clerk = True
+    add_role = True
 
-    form = ClerkForm()
+    form = RoleForm()
     if form.validate_on_submit():
-        clerk = Clerk(name=form.name.data,
+        role = Role(name=form.name.data,
                     description=form.description.data)
 
         try:
-            # add clerk to the database
-            db.session.add(clerk)
+            # add role to the database
+            db.session.add(role)
             db.session.commit()
-            flash('You have successfully added a new clerk.')
+            flash('You have successfully added a new role.')
         except:
-            # in case clerk name already exists
-            flash('Error: clerk name already exists.')
+            # in case role name already exists
+            flash('Error: role name already exists.')
 
-        # redirect to the clerk page
-        return redirect(url_for('admin.list_clerks'))
+        # redirect to the role page
+        return redirect(url_for('admin.list_roles'))
 
-    # load clerk template 
-    return render_template('admin/clerks/clerk.html', add_clerk=add_clerk,
-                           form=form, title='Add Clerk')
+    # load role template 
+    return render_template('admin/roles/role.html', add_role=add_role,
+                           form=form, title='Add Role')
 
 
 
-@admin.route('/clerks/delete/<int:id>', methods=['GET', 'POST'])
+@admin.route('/roles/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delete_clerk(id):
+def delete_role(id):
     """
-    Delete a clerk from the database
+    Delete a role from the database
     """
     check_admin()
 
-    clerk = Clerk.query.get_or_404(id)
-    db.session.delete(clerk)
+    role = Role.query.get_or_404(id)
+    db.session.delete(role)
     db.session.commit()
-    flash('You have deleted the clerk.')
+    flash('You have deleted the role.')
 
-    # redirect to the clerk page
-    return redirect(url_for('admin.list_clerks'))
+    # redirect to the role page
+    return redirect(url_for('admin.list_roles'))
 
-    return render_template(title="Delete Clerk")
+    return render_template(title="Delete Role")

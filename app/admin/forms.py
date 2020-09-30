@@ -11,7 +11,7 @@ class ProductForm(FlaskForm):
     status = StringField('Status', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-class ClerkForm(FlaskForm):
+class RoleForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
     submit = SubmitField('Submit')
