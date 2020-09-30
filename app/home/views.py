@@ -13,8 +13,8 @@ def landingpage():
 
 @home.route('/dashboard')
 # @login_required #add later
-def dashboardpage():
+def merchantdashboardpage():
     """
     Render the dashboard page template on the /dashboard route
     """
-    return render_template('home/dashboard.html', title="Welcome to the dashboard")    
+    return render_template('home/merchantdashboard.html', title="Welcome Merchant")    

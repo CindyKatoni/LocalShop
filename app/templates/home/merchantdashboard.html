@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-<title>Admin Dashboard</title>
+<title>{{ title }}</title>
 <!-- custom-theme -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -85,7 +85,7 @@
 					</nav>
 				</li>
 				<!-- //nav_agile_w3l -->
-				<li class="second logo"><h1><a href="main-page.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Dashboard </a></h1></li>
+				<li class="second logo"><h1><a href="{{url_for('home.landingpage')}}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Dashboard </a></h1></li>
 					<li class="second admin-pic">
 				       <ul class="top_dp_agile">
 									<li class="dropdown profile_details_drop">
@@ -135,8 +135,8 @@
 											
 											<i class="fa fa-user" aria-hidden="true"></i>
 											<div class="ca-content">
-												<h4 class="ca-main">3</h4>
-												<h3 class="ca-sub">Number of Merchants</h3>
+												<h4 class="ca-main">1</h4>
+												<h3 class="ca-sub">Number of Admins</h3>
 											</div>
 										</a>
 									</li>
@@ -188,24 +188,25 @@
 								
 								
 								 <div class="col-md-6 bars_agileits agile_info_shadow">
-								   <h3 class="w3_inner_tittle two">Daily Sales</h3>
+								   <h3 class="w3_inner_tittle two">Store Report</h3>
 										<div class='bar_group'>
-												<div class='bar_group__bar thin' label='Rating' show_values='true' tooltip='true' value='343'></div>
-												<div class='bar_group__bar thin' label='Quality' show_values='true' tooltip='true' value='235'></div>
-												<div class='bar_group__bar thin' label='Amount' show_values='true' tooltip='true' value='550'></div>
-												<div class='bar_group__bar thin' label='Farming' show_values='true' tooltip='true' value='456'></div>
+												<div class='bar_group__bar thin' label='Mr.Price' show_values='true' tooltip='true' value='343'></div>
+												<div class='bar_group__bar thin' label='Woolworths' show_values='true' tooltip='true' value='235'></div>
+												<div class='bar_group__bar thin' label='Nakumatt' show_values='true' tooltip='true' value='550'></div>
+												<div class='bar_group__bar thin' label='Uchumi' show_values='true' tooltip='true' value='456'></div>
 										</div>
 								</div>
 								<div class="col-md-6 fallowers_agile agile_info_shadow">
-									<h3 class="w3_inner_tittle two">Active Clerks</h3>
+									<h3 class="w3_inner_tittle two">Products  Report</h3>
 												<div class="work-progres">
 													<div class="table-responsive">
 														<table class="table table-hover">
 														  <thead>
 															<tr>
 															  <th>#</th>
-															  <th>Clerk</th>
-															  <th>Manager</th>                                   
+															  <th>Store</th>
+															  <th>Paid Product</th>
+															  <th>Unpaid Product</th>                                   
 																								
 															  <th>Status</th>
 															  <th>Progress</th>
@@ -214,52 +215,41 @@
 													  <tbody>
 														<tr>
 														  <td>1</td>
-														  <td>Alex</td>
-														  <td>Malorum</td>                                 
+														  <td>Mr.Price</td>
+														  <td>Shirts Consignment</td>
+														  <td>Belts</td>                                 
 																					 
 														  <td><span class="label label-danger">in progress</span></td>
 														  <td><span class="badge badge-info">50%</span></td>
 													  </tr>
 													  <tr>
 														  <td>2</td>
-														  <td>Steve</td>
-														  <td>Evan</td>                               
+														  <td>Woolworths</td>
+														  <td>Rugs</td>
+														  <td>None</td>                               
 																						  
 														  <td><span class="label label-success">completed</span></td>
 														  <td><span class="badge badge-success">100%</span></td>
 													  </tr>
 													  <tr>
 														  <td>3</td>
-														  <td>Phoebe</td>
-														  <td>John</td>                                
+														  <td>Nakumatt</td>
+														  <td>Kitchen SUpplies</td>
+														  <td>Furniture</td>                                
 														  
 														  <td><span class="label label-warning">in progress</span></td>
 														  <td><span class="badge badge-warning">75%</span></td>
 													  </tr>
 													  <tr>
 														  <td>4</td>
-														  <td>Patience</td>
-														  <td>Danial</td>                                 
+														  <td>Uchumi</td>
+														  <td>Perishables</td>
+														  <td>Stationary</td>                                 
 																					 
 														  <td><span class="label label-info">in progress</span></td>
 														  <td><span class="badge badge-info">65%</span></td>
 													  </tr>
-													  <tr>
-														  <td>5</td>
-														  <td>Siderra</td>
-														  <td>David</td>                                
-																						 
-														  <td><span class="label label-warning">in progress</span></td>
-														  <td><span class="badge badge-danger">95%</span></td>
-													  </tr>
-													  <tr>
-														  <td>6</td>
-														  <td>Kelvin</td>
-														  <td>Mickey</td>                                  
-																					 
-														  <td><span class="label label-info">in progress</span></td>
-														  <td><span class="badge badge-success">95%</span></td>
-													  </tr>
+												
 												  </tbody>
 											  </table>
 											</div>
@@ -281,7 +271,7 @@
 <!-- banner -->
 <!--copy rights start here-->
 <div class="copyrights">
-	 <p>© 2017 Esteem. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+	 <!-- <p>© 2020. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p> -->
 </div>	
 <!--copy rights end here-->
 <!-- js -->
