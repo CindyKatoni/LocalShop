@@ -95,7 +95,7 @@ def edit_product(id):
 
 
 
-# Role Views
+# clerk Views
 
 
 @admin.route('/clerks')
@@ -122,7 +122,7 @@ def add_clerk():
 
     form = ClerkForm()
     if form.validate_on_submit():
-        role = Role(name=form.name.data,
+        clerk = Clerk(name=form.name.data,
                     description=form.description.data)
 
         try:
@@ -137,8 +137,8 @@ def add_clerk():
         # redirect to the clerk page
         return redirect(url_for('admin.list_clerks'))
 
-    # load clerk template
-    return render_template('admin/clerks/clerk.html', add_role=add_clerk,
+    # load clerk template 
+    return render_template('admin/clerks/clerk.html', add_clerk=add_clerk,
                            form=form, title='Add Clerk')
 
 
