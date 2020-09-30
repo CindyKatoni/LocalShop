@@ -105,7 +105,7 @@ def list_clerks():
     """
     List all clerks
     """
-    cleks = Clerk.query.all()
+    clerks = Clerk.query.all()
     return render_template('admin/clerks/clerks.html',
                            clerks=clerks, title='Clerks')
 
