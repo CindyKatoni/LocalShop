@@ -12,6 +12,7 @@ def landingpage():
     return render_template('home/index.html', title="Welcome to the home page")
 
 @home.route('/dashboard')
+# @login_required #add later
 def dashboardpage():
     """
     Render the dashboard page template on the /dashboard route

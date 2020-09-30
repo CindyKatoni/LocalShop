@@ -2,6 +2,9 @@
 #3rd Party Imports
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+
+
 
 
 #local imports
@@ -9,6 +12,8 @@ from config import app_config
 
 #Db initialization
 db = SQLAlchemy()
+
+login_manager = LoginManager()
 
 def create_app(config_name):
     '''
@@ -21,11 +26,26 @@ def create_app(config_name):
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
+
+    login_manager.init_app(app)
+    login_manager.login_message = "You must be logged in to access this page."
+    # login_manager.login_view = "auth.login"
+
+    
     # Register Home Blueprint
     from app import models
     
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
+
+    from .admin import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')  ##dashboard
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
+
+
+
 
         
     return app
