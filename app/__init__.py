@@ -16,14 +16,17 @@ def create_app(config_name):
     also it creates a db object
     '''
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object(app_config[config_name])
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+    # app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
-    # temporary route
-    @app.route('/')
-    def hello_world():
-        return 'Hello, World!'
+    # Register Home Blueprint
+    from app import models
+    
+    from .home import home as home_blueprint
+    app.register_blueprint(home_blueprint)
+
         
     return app
 
