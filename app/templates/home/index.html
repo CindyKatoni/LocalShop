@@ -31,7 +31,10 @@
             <a href="{{ url_for('home.landingpage') }}" class="active">Home</a>
           </li>
           <li>
-            <a href="#" class="scroll">Register</a>
+            <a href="{{url_for('auth.register')}}" class="scroll">Register</a>
+          </li>
+          <li>
+            <a href="{{url_for('auth.login')}}" class="scroll">Login</a>
           </li>
           <li>
             <button type="button" class="btn w3ls-btn" data-toggle="modal" aria-pressed="false" data-target="#exampleModalCenter2">
