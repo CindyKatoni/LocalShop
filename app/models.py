@@ -60,10 +60,11 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     productname = db.Column(db.String(60), unique=True)
-    producttype = db.Column(db.String(60), unique=True)
-    quantity = db.Column(db.Integer, nullable=False)
+    productspoilt= db.Column(db.Integer, unique=True)
+    quantity= db.Column(db.Integer,unique=True)
+    stock = db.Column(db.Integer, nullable=False)
     status = db.Column(db.String(60), unique=True)
-    total_price = db.Column(db.Numeric(12, 2), nullable=False)
+    totalprice = db.Column(db.Numeric(12, 2), nullable=False)
 
     @classmethod
     def unit_price(self):
@@ -88,4 +89,18 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role: {}>'.format(self.name)
+
+class SupplyRequest(db.Model):
+    """
+    Create a Product Request table
+    """
+
+    __tablename__ = 'supplyrequest'
+
+    id = db.Column(db.Integer, primary_key=True)
+    productname = productname = db.Column(db.String(60), unique=True)
+    total_required = db.Column(db.Integer, nullable=False)
+    approval_status = db.Column(db.String(60), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship("User", foreign_keys=user_id)
         

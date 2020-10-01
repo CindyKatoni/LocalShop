@@ -1,8 +1,10 @@
 #Views for home page
-from flask import abort, render_template, redirect,url_for
+from flask import abort, render_template, redirect,url_for,flash
 from flask_login import current_user, login_required
-
+from .forms import ProductForm
 from . import home
+from ..models import Product
+
 @home.route('/')
 def landingpage():
     """
@@ -37,19 +39,20 @@ def add_product():
 
     form = ProductForm()
     if form.validate_on_submit():
-        product = Product(name=form.productname.data,
-                                product_type=form.producttype.data,quantity=form.quantity.data,
-                                status=form.status.data)
+        product = Product(productname=form.productname.data,
+                                quantity=form.quantity.data,
+                                status=form.status.data,productspoilt=form.productspoilt.data,totalprice=form.totalprice.data,stock=form.stock.data)
         try:
             # adding product to the database
             db.session.add(product)
             db.session.commit()
             flash('You have added a new product.')
+            return redirect(url_for('home.dataentry'))
+
         except:
             flash('Error: product name already exists.')
 
-        
 
-    return render_template('product.html', product_form = form)
+    return render_template('home/products.html', product_form = form)
                            
 
