@@ -13,13 +13,13 @@ def login():
         user = User.query.filter_by(username = form.username.data).first()
         if user != None and user.verify_password(form.password.data):
             login_user(user,form.remember.data)
-            flash('Wrong Username or Password')
+           
              # redirect to the appropriate dashboard page
             if User.is_admin:
                 return redirect(url_for('home.admin_dashboard'))
             else:
                 return redirect(url_for('home.dataentry'))
-
+        
         # when login details are incorrect
         else:
             flash('Invalid email or password.')

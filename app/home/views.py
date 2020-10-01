@@ -12,6 +12,7 @@ from . import home
 def admin_dashboard():
     # prevent non-admins from accessing the page
     if not current_user.is_admin:
+        
         return redirect(url_for("home.dataentry"))
 
     return render_template('home/dashboard.html', title="Dashboard")

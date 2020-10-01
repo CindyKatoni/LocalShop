@@ -60,9 +60,11 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     productname = db.Column(db.String(60), unique=True)
-    quantity = db.Column(db.Integer, nullable=False)
-
-    total_price = db.Column(db.Numeric(12, 2), nullable=False)
+    productspoilt= db.Column(db.Integer, unique=True)
+    quantity= db.Column(db.Integer,unique=True)
+    stock = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(60), unique=True)
+    totalprice = db.Column(db.Numeric(12, 2), nullable=False)
 
     @classmethod
     def unit_price(self):

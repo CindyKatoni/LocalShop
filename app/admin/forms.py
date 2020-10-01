@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField,RadioField
 from wtforms.validators import DataRequired
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from ..models import Product, Role
+from ..models import Product, Role, SupplyRequest
 
 
 class ProductForm(FlaskForm):
@@ -32,4 +32,10 @@ class UserAssignForm(FlaskForm):
     
     role = QuerySelectField(query_factory=lambda: Role.query.all(),
                             get_label="name")
+    submit = SubmitField('Submit')
+
+
+class SupplyVerdict(FlaskForm):
+
+    status  = RadioField('Label', choices = [('approve', 'Approve'), ('decline', 'Decline')], validators = [DataRequired()])
     submit = SubmitField('Submit')

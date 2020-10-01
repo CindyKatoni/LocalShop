@@ -36,7 +36,7 @@
 					<nav class="gn-menu-wrapper">
 						<div class="gn-scroller scrollbar1">
 							<ul class="gn-menu agile_menu_drop">
-								<li><a href="main-page.html"> <i class="fa fa-tachometer"></i> Dashboard</a></li>
+								<li><a href='{{ url_for("home.admin_dashboard") }}'> <i class="fa fa-tachometer"></i> Dashboard</a></li>
 								<li>
 									<a href="#"><i class="fa fa-cogs" aria-hidden="true"></i> UI Components <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
 									<ul class="gn-submenu">
@@ -105,7 +105,7 @@
 						</ul>
 				</li>
 				<li class="second top_bell_nav">
-                    <a href='{{ url_for("home.landingpage") }}'> Home</a>
+                    <a href='{{ url_for("home.admin_dashboard") }}'> Home</a>
 				</li>
 				<li class="second top_bell_nav">
                     <a href="#">Merchant</a> 

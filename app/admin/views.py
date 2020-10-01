@@ -1,9 +1,9 @@
 from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 from . import admin
-from .forms import ProductForm,RoleForm,UserAssignForm
+from .forms import ProductForm,RoleForm,UserAssignForm, SupplyVerdict
 from .. import db
-from ..models import Product,Role,User
+from ..models import Product,Role,User,SupplyRequest
 
 def check_admin():
     """
@@ -193,9 +193,10 @@ def list_users():
     check_admin()
 
     users = User.query.all()
-    return render_template('admin/users/users.html',
+    request = SupplyRequest.query.all()
+    
+    return render_template('admin/users/users.html',request=request,
                            users=users, title='Users')
-
 
 @admin.route('/users/assign/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -222,3 +223,25 @@ def assign_user(id):
         return redirect(url_for('admin.list_users'))
 
     return render_template('admin/users/user.html',user=user, form=form,title='Assign User')
+
+
+@admin.route('/users/request/<int:id>', methods=['GET', 'POST'])
+@login_required
+def check_requests(id):
+    """
+    Assign a role to an user
+    """
+    check_admin()
+
+    request = SupplyRequest.query.get_or_404(id)
+
+    form = SupplyVerdict()
+    if form.validate_on_submit():
+        request.approval_status = form.status.data
+        db.session.add(request)
+        db.session.commit()
+
+        # redirect to the roles page
+        return redirect(url_for('admin.list_users'))
+
+    return render_template('home/approve.html',request=request, form=form,title='Approve Requests')
