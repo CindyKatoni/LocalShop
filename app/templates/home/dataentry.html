@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-<title>Admin Dashboard</title>
+<title>Data Entry Dashboard</title>
 <!-- custom-theme -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -85,7 +85,7 @@
 					</nav>
 				</li>
 				<!-- //nav_agile_w3l -->
-				<li class="second logo"><h1><a href="{{url_for('home.landingpage')}}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Dashboard </a></h1></li>
+				<li class="second logo"><h1><a href="main-page.html"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Dashboard </a></h1></li>
 					<li class="second admin-pic">
 				       <ul class="top_dp_agile">
 									<li class="dropdown profile_details_drop">
@@ -108,13 +108,11 @@
                     <a href='{{ url_for("home.landingpage") }}'> Home</a>
 				</li>
 				<li class="second top_bell_nav">
-                    <a href="#">Merchant</a> 
+                    <a href="#">Add Products</a> 
 				</li>
-				<li class="second top_bell_nav">
-                    <a href="{{url_for('admin.list_users')}}">Data Clerk</a> 
-                </li>
+				
                 <li class="second top_bell_nav">
-                    <a href="#">Inventory</a> 
+                    <a href="#">Request product supply</a> 
 				</li>
 				<li class="second top_bell_nav">
                     <a href="{{url_for('auth.logout')}}">Logout</a> 
@@ -139,7 +137,7 @@
 											<i class="fa fa-user" aria-hidden="true"></i>
 											<div class="ca-content">
 												<h4 class="ca-main">3</h4>
-												<h3 class="ca-sub">Number of Merchants</h3>
+												<h3 class="ca-sub">Number of Items Received</h3>
 											</div>
 										</a>
 									</li>
@@ -148,7 +146,7 @@
 										  <i class="fa fa-user" aria-hidden="true"></i>
 											<div class="ca-content">
 												<h4 class="ca-main one">20</h4>
-												<h3 class="ca-sub one">Number of Clerks</h3>
+												<h3 class="ca-sub one">Number of in Stock</h3>
 											</div>
 										</a>
 									</li>
