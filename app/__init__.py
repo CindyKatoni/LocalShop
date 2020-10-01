@@ -1,5 +1,5 @@
 from flask import Flask 
-from config import Config
+from config import config_options
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
@@ -21,10 +21,14 @@ def create_app(config_name):
     This function loads the correct configurations from config.py and instance/config.py
     also it creates a db object
     '''
-    app = Flask(__name__, instance_relative_config=True)
-    app.config["TEMPLATES_AUTO_RELOAD"] = True
-    # app.config.from_object(app_config[config_name])
-    app.config.from_pyfile('config.py')
+    app = Flask(__name__)
+
+
+    # Creating the app configurations
+    from flask_bootstrap import Bootstrap
+    app.config.from_object(config_options[config_name])
+    
+
     db.init_app(app)
     bootstrap.init_app(app)
     mail.init_app(app)

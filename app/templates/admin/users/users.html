@@ -1,6 +1,6 @@
 {% import "bootstrap/utils.html" as utils %}
-{% extends "base.html" %}
-{% block title %}Users{% endblock %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends 'base.html' %}
 {% block body %}
 <div class="content-section">
   <div class="outer">
@@ -57,4 +57,19 @@
     </div>
   </div>
 </div>
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        <h1 style="text-align:center;">Supply Requests</h1>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
