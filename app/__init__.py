@@ -1,5 +1,5 @@
 from flask import Flask 
-from config import Config
+from config import Config,app_config
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
@@ -41,7 +41,7 @@ def create_app(config_name):
     app.register_blueprint(home_blueprint)
 
     from .admin import admin as admin_blueprint
-    app.register_blueprint(admin_blueprint, url_prefix='/admin')  ##dashboard
+    app.register_blueprint(admin_blueprint)  ##dashboard
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)

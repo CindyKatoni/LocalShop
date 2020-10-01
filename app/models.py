@@ -60,7 +60,9 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     productname = db.Column(db.String(60), unique=True)
+    producttype = db.Column(db.String(60), unique=True)
     quantity = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(60), unique=True)
     total_price = db.Column(db.Numeric(12, 2), nullable=False)
 
     @classmethod

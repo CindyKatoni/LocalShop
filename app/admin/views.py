@@ -222,3 +222,4 @@ def assign_user(id):
         return redirect(url_for('admin.list_users'))
 
     return render_template('admin/users/user.html',user=user, form=form,title='Assign User')
+
