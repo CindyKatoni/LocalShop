@@ -37,6 +37,7 @@ def signup():
         mail_message("Welcome to Local Shop",user.email,user=user)
         return  redirect(url_for('auth.login'))
     return render_template('auth/signup.html',registration_form=form )
+    
 @auth.route('/logout')
 @login_required
 def logout():
