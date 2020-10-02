@@ -37,5 +37,10 @@ class UserAssignForm(FlaskForm):
 
 class SupplyVerdict(FlaskForm):
 
-    status  = RadioField('Label', choices = [('approve', 'Approve'), ('decline', 'Decline')], validators = [DataRequired()])
+    status  = RadioField('Label', choices = [('Approved', 'Approve'), ('Declined', 'Decline')], validators = [DataRequired()])
+    submit = SubmitField('Submit')
+
+class PayStatus(FlaskForm):
+
+    status  = RadioField('Label', choices = [('paid', 'paid'), ('unpaid', 'unpaid')], validators = [DataRequired()])
     submit = SubmitField('Submit')

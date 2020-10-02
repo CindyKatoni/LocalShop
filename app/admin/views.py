@@ -1,7 +1,7 @@
 from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 from . import admin
-from .forms import ProductForm,RoleForm,UserAssignForm, SupplyVerdict
+from .forms import ProductForm,RoleForm,UserAssignForm, SupplyVerdict, PayStatus
 from .. import db
 from ..models import Product,Role,User,SupplyRequest
 
@@ -16,7 +16,7 @@ def check_admin():
 # Product Views
 
 
-@admin.route('/products', methods=['GET', 'POST'])
+@admin.route('/', methods=['GET', 'POST'])
 @login_required
 def list_products():
     """
@@ -26,74 +26,8 @@ def list_products():
 
     products = Product.query.all()
 
-    return render_template('admin/products/products.html',
+    return render_template('home/products/product.html',
                            products=products, title="Products")
-
-
-@admin.route('/products/add', methods=['GET', 'POST'])
-@login_required
-def add_product():
-    """
-    Add a product to the database
-    """
-    check_admin()
-
-    add_product = True
-
-    form = ProductForm()
-    if form.validate_on_submit():
-        product = Product(name=form.name.data,
-                                description=form.description.data,
-                                status=form.status.data)
-        try:
-            # adding product to the database
-            db.session.add(product)
-            db.session.commit()
-            flash('You have added a new product.')
-        except:
-            flash('Error: product name already exists.')
-
-        
-        return redirect(url_for('admin.list_products'))
-
-    return render_template('admin/products/product.html', action="Add",
-                           add_product=add_product, form=form,
-                           title="Add Product")
-
-
-@admin.route('/products/edit/<int:id>', methods=['GET', 'POST'])
-@login_required
-def edit_product(id):
-    """
-    Edit a product
-    """
-    check_admin()
-
-    add_product = False
-
-    product = Product.query.get_or_404(id)
-    form = ProductForm(obj=product)
-    if form.validate_on_submit():
-        product.name = form.name.data
-        product.description = form.description.data
-        product.status = form.status.data
-        db.session.commit()
-        flash('You have successfully edited the product.')
-
-        
-        return redirect(url_for('admin.list_products'))
-
-    form.description.data = product.description
-    form.name.data = product.name
-    form.status.data = product.status
-    return render_template('admin/products/product.html', action="Edit",
-                           add_product=add_product, form=form,
-                           product=product, title="Edit Product")
-
-
-
-
-
 
 @admin.route('/roles')
 @login_required
@@ -193,9 +127,8 @@ def list_users():
     check_admin()
 
     users = User.query.all()
-    request = SupplyRequest.query.all()
     
-    return render_template('admin/users/users.html',request=request,
+    return render_template('admin/users/users.html',
                            users=users, title='Users')
 
 @admin.route('/users/assign/<int:id>', methods=['GET', 'POST'])
@@ -242,6 +175,28 @@ def check_requests(id):
         db.session.commit()
 
         # redirect to the roles page
-        return redirect(url_for('admin.list_users'))
+        return redirect(url_for('home.admin_dashboard'))
 
     return render_template('home/approve.html',request=request, form=form,title='Approve Requests')
+
+
+@admin.route('/users/payment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def check_payment(id):
+    """
+    Assign a role to an user
+    """
+    check_admin()
+
+    product = Product.query.get_or_404(id)
+
+    form = PayStatus()
+    if form.validate_on_submit():
+        product.status = form.status.data
+        db.session.add(product)
+        db.session.commit()
+
+        # redirect to the roles page
+        return redirect(url_for('home.admin_dashboard'))
+
+    return render_template('home/paid.html',product=product, form=form,title='Payment Status')

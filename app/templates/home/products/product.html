@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -71,25 +72,64 @@
 			
 		</div>
 		<div class="clearfix"></div>
-
-<div class="content-section" style="margin: 150px;">
- <div class="outer">
+<div class="content-section">
+  <div class="outer">
     <div class="middle">
-      <div class="inner">
-        <div class="center">
-            <h1> Assign roles </h1>
-            <br/>
-            <p>
-                Select role to assign:
-                <span style="color: red;">
-                    {{ user.first_name }} {{ user.last_name }}
-                </span>
-            </p>
-            <br/>
-            {{ wtf.quick_form(form) }}
+      <div class="inner"  style="margin: 70px;">
+        <br/>
+        
+        <br/>
+        <h1 style="text-align:center;">Products</h1>
+        {% if products %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th width="15%"> Product Name </th>
+                  <th width="30%"> Spoilt Products </th>
+                  <th width="15%"> Quantity Received</th>
+                  <th width="15%"> Quantity In Stock</th>
+                  <th width="15%"> Payment Status</th>
+                  <th width="15%"> Total Price</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+              {% for product in products %}
+                
+                    <tr>
+                      <td> {{ product.productname }} </td>
+                     
+                      <td>
+                        {{ product.productspoilt }}
+                      </td>
+                      <td>
+                        {{ product.quantity }}
+                      </td>
+                      <td>
+                        {{ product.stock }}
+                      </td>
+                      <td>
+                        {{ product.status}}
+                      </td>
+                      <td>
+                        {{ product.totalprice}}
+                      </td>
+                      
+                    </tr>
+                
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
         </div>
       </div>
     </div>
   </div>
 </div>
+
+</div>
 {% endblock %}
+

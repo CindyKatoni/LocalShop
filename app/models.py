@@ -59,16 +59,16 @@ class Product(db.Model):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
-    productname = db.Column(db.String(60), unique=True)
-    productspoilt= db.Column(db.Integer, unique=True)
+    productname = db.Column(db.String(60), nullable=False)
+    productspoilt= db.Column(db.Integer, nullable=False)
     quantity= db.Column(db.Integer,unique=True)
     stock = db.Column(db.Integer, nullable=False)
-    status = db.Column(db.String(60), unique=True)
+    status = db.Column(db.String(60), nullable=False)
     totalprice = db.Column(db.Numeric(12, 2), nullable=False)
 
     @classmethod
     def unit_price(self):
-        return self.total_price / self.quantity
+        return self.totalprice / self.quantity
     
     def __repr__(self):
         return '<Products: {}>'.format(self.name)
@@ -98,8 +98,8 @@ class SupplyRequest(db.Model):
     __tablename__ = 'supplyrequest'
 
     id = db.Column(db.Integer, primary_key=True)
-    productname = productname = db.Column(db.String(60), unique=True)
+    productname = productname = db.Column(db.String(60), nullable=False)
     total_required = db.Column(db.Integer, nullable=False)
-    approval_status = db.Column(db.String(60), unique=True)
+    approval_status = db.Column(db.String(60))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship("User", foreign_keys=user_id)

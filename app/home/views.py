@@ -1,9 +1,9 @@
 #Views for home page
 from flask import render_template,flash, request, redirect, url_for
 from flask_login import login_user, logout_user,login_required, current_user
-from app.models import User, SupplyRequest
+from app.models import User, SupplyRequest, Product
 from .. import db
-from .forms import SupplyRequestForm
+from .forms import SupplyRequestForm, ProductForm
 
 from . import home
 # add admin dashboard view
@@ -14,8 +14,11 @@ def admin_dashboard():
     if not current_user.is_admin:
         
         return redirect(url_for("home.dataentry"))
-
-    return render_template('home/dashboard.html', title="Dashboard")
+    products = Product.query.all()
+    request = SupplyRequest.query.all()
+    items = Product.query.count()
+    users = User.query.count()
+    return render_template('home/dashboard.html', title="Dashboard", products=products,request=request, items = items,users=users)
 
 @home.route('/')
 def landingpage():
@@ -30,7 +33,10 @@ def dataentry():
     """
     Render the dashboard page template on the /dashboard route
     """
-    return render_template('home/dataentry.html', title="Welcome to the dashboard")    
+    products = Product.query.all()
+    request = SupplyRequest.query.all()
+    items = Product.query.count()
+    return render_template('home/dataentry.html', title="Welcome to the dashboard", products=products, request=request, items=items)    
 
 @home.route('/request',methods = ["POST","GET"])
 @login_required
@@ -47,3 +53,33 @@ def request():
         return redirect(url_for("home.dataentry"))
 
     return render_template('home/request.html', title="Create your request:", form=form)    
+
+@home.route('/request/<int:request_id>/delete')
+@login_required
+def delete_request(request_id):
+    
+    request = SupplyRequest.query.filter_by(id=request_id).first_or_404()
+    db.session.delete(request)
+    db.session.commit()
+    
+    return redirect(url_for("home.dataentry"))
+
+@home.route('/add',methods = ["POST","GET"])
+@login_required
+def add_product():
+
+    form = ProductForm()
+    if form.validate_on_submit():
+        productname = form.productname.data
+        productspoilt = form.productspoilt.data
+        quantity = form.quantity.data
+        stock = form.stock.data
+        totalprice = form.totalprice.data
+        status = form.status.data
+
+        new_product = Product(productname=productname,productspoilt=productspoilt,quantity=quantity,stock=stock,status=status,totalprice=totalprice)
+        db.session.add(new_product)
+        db.session.commit()
+        return redirect(url_for("home.dataentry"))
+
+    return render_template('home/products/products.html', title="Add Product", form=form)

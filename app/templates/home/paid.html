@@ -71,19 +71,16 @@
 			
 		</div>
 		<div class="clearfix"></div>
-
 <div class="content-section" style="margin: 150px;">
  <div class="outer">
     <div class="middle">
       <div class="inner">
         <div class="center">
-            <h1> Assign roles </h1>
+            <h1> Payment status</h1>
             <br/>
             <p>
-                Select role to assign:
-                <span style="color: red;">
-                    {{ user.first_name }} {{ user.last_name }}
-                </span>
+                Has the supplier been paid:
+                
             </p>
             <br/>
             {{ wtf.quick_form(form) }}

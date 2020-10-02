@@ -1,11 +1,13 @@
-{% import 'bootstrap/wtf.html' as wtf %}
-{% extends 'base.html' %}
-
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Add a Product{% endblock %}
 {% block body %}
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-<title>Admin Dashboard</title>
+<title>Data Entry Dashboard</title>
 <!-- custom-theme -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,9 +35,8 @@
 		  <!-- /nav-->
 		  <div class="w3_agileits_top_nav">
 			<ul id="gn-menu" class="gn-menu-main">
-			  		
-				<!-- //nav_agile_w3l -->
-				<li class="second logo"><h1><a href="{{url_for('home.admin_dashboard')}}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Admin Dashboard </a></h1></li>
+			  	
+				<li class="second logo"><h1><a href="{{url_for('home.dataentry')}}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Data Entry Dashboard </a></h1></li>
 					<li class="second admin-pic">
 				       <ul class="top_dp_agile">
 									<li class="dropdown profile_details_drop">
@@ -45,7 +46,7 @@
 											</div>	
 										</a>
 										<ul class="dropdown-menu drp-mnu">
-											<li> <a href="#"> Admin</a> </li> 
+											<li> <a href="#"> Admin</a> </li>  
                                             <li> <a href="#">Data Clerk</a> </li>
                                             <li> <a href="#">Inventory</a> </li>
 										</ul>
@@ -54,13 +55,14 @@
 						</ul>
 				</li>
 				<li class="second top_bell_nav">
-                    <a href='{{ url_for("home.admin_dashboard") }}'> Home</a>
+                    <a href='{{ url_for("home.dataentry") }}'> Home</a>
 				</li>
 				<li class="second top_bell_nav">
-                    <a href="{{url_for('admin.list_users')}}">Data Clerk</a> 
-                </li>
+                    <a href="{{url_for('home.add_product')}}">Add Products</a> 
+				</li>
+				
                 <li class="second top_bell_nav">
-                    <a href="{{url_for('admin.list_products')}}">Inventory</a> 
+                    <a href="{{url_for('home.request')}}">Request product supply</a> 
 				</li>
 				<li class="second top_bell_nav">
                     <a href="{{url_for('auth.logout')}}">Logout</a> 
@@ -71,25 +73,13 @@
 			
 		</div>
 		<div class="clearfix"></div>
-
 <div class="content-section" style="margin: 150px;">
- <div class="outer">
-    <div class="middle">
-      <div class="inner">
-        <div class="center">
-            <h1> Assign roles </h1>
-            <br/>
-            <p>
-                Select role to assign:
-                <span style="color: red;">
-                    {{ user.first_name }} {{ user.last_name }}
-                </span>
-            </p>
-            <br/>
-            {{ wtf.quick_form(form) }}
-        </div>
-      </div>
-    </div>
+  <div class="center">
+    <h1>Add a Product</h1>
+    <br/>
+    <!-- #changedthis -->
+    {{ utils.flashed_messages() }}
+    {{ wtf.quick_form(form) }} 
   </div>
 </div>
 {% endblock %}
